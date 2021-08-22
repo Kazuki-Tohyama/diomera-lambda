@@ -1,5 +1,8 @@
-name: GitHub Actions Demo
-on: [push]
+name: GitHub Deploy
+on: 
+  push:
+    branches:
+      - develop
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
@@ -15,3 +18,13 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+      - uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+      - run: zip -r package.zip ./*
+      - run: pip3 install awscli
+      - run: aws lambda update-function-code --function-name diomera --zip-file fileb://package.zip --publish
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: ap-northeast-1
