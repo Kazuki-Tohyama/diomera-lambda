@@ -1,3 +1,5 @@
+// Github Action 設定テスト
+
 exports.handler = async (event) => {
   let S3_ENDPOINT, DYNAMODB_ENDPOINT;
 
