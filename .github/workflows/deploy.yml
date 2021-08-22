@@ -18,4 +18,4 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      - run: echo "s3 env is ${{ env.S3_BUCKETNAME }}"
+      - run: echo "s3 env is ${{ secrets.S3_BUCKETNAME }}"
