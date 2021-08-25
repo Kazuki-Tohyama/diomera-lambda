@@ -12,7 +12,7 @@ exports.handler = async (event) => {
     DYNAMODB_TABLENAME = process.env.DEV_DYNAMODB_TBLNAME;
   }
 
-  // const reqBody = event['body-json'];
+  const reqBody = event['body-json'];
 
   const unixtime = new Date().getTime();
 
