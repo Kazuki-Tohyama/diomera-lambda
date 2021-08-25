@@ -25,7 +25,7 @@ exports.handler = async (event) => {
     }
   };
 
-  const test = dynamodb.put(params, (err, data) => {
+  const test = dynamodb.put(params, function (err, data) {
     console.log('putItem');
     if (err) {
       console.log("Error", err);
