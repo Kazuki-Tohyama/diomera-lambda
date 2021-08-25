@@ -1,5 +1,5 @@
 const AWS = require('aws-sdk');
-const dynamodb = new AWS.DynamoDB().DocumentClient();
+const dynamodb = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = async (event) => {
   let S3_ENDPOINT, DYNAMODB_TABLENAME;
