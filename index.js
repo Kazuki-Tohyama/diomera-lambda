@@ -1,5 +1,5 @@
 const AWS = require('aws-sdk');
-const ddb = new AWS.DynamoDB();
+const dynamodb = new AWS.DynamoDB().DocumentClient();
 
 exports.handler = async (event) => {
   let S3_ENDPOINT, DYNAMODB_TABLENAME;
@@ -12,7 +12,7 @@ exports.handler = async (event) => {
     DYNAMODB_TABLENAME = process.env.DEV_DYNAMODB_TBLNAME;
   }
 
-  const reqBody = event['body-json'];
+  // const reqBody = event['body-json'];
 
   const unixtime = new Date().getTime().toString();
 
@@ -20,12 +20,12 @@ exports.handler = async (event) => {
     TableName: DYNAMODB_TABLENAME,
     Item: {
       'id': { N: unixtime }
-      // 'name': reqBody.name,
-      // 'title': reqBody.title
+      // 'name': { S: reqBody.name },
+      // 'title': { S: reqBody.title}
     }
   };
 
-  await ddb.putItem(params, (err, data) => {
+  dynamodb.put(params, (err, data) => {
     console.log('putItem');
     if (err) {
       console.log("Error", err);
