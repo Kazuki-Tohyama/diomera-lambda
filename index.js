@@ -19,7 +19,7 @@ exports.handler = async (event) => {
   const params = {
     TableName: DYNAMODB_TABLENAME,
     Item: {
-      'id': { N: unixtime }
+      'id': unixtime
       // 'name': { S: reqBody.name },
       // 'title': { S: reqBody.title}
     }
