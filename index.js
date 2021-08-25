@@ -19,9 +19,9 @@ exports.handler = async (event) => {
   const params = {
     TableName: DYNAMODB_TABLENAME,
     Item: {
-      'id': unixtime
-      // 'name': reqBody.name,
-      // 'title': reqBody.title
+      'id': unixtime,
+      'name': reqBody.name,
+      'title': reqBody.title
     }
   };
 
@@ -31,8 +31,6 @@ exports.handler = async (event) => {
   } catch (err) {
     result = err;
   }
-
-  // const responseBody = event['body-json'];
 
   const response = {
     statusCode: 200,
