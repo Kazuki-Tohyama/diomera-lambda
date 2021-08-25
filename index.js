@@ -1,15 +1,34 @@
-// Github Action 設定テスト
+const AWS = require('aws-sdk');
+const ddb = new AWS.DynamoDB({ apiVersion: '2012-08-10' });
 
 exports.handler = async (event) => {
-  let S3_ENDPOINT, DYNAMODB_ENDPOINT;
+  let S3_ENDPOINT, DYNAMODB_TABLENAME;
 
   if (event['stage-variables']['env'] === 'prod') {
     S3_ENDPOINT = process.env.PROD_S3_ARN;
-    DYNAMODB_ENDPOINT = process.env.PROD_DYNAMODB_ARN;
+    DYNAMODB_TABLENAME = process.env.PROD_DYNAMODB_TBLNAME;
   } else {
     S3_ENDPOINT = process.env.DEV_S3_ARN;
-    DYNAMODB_ENDPOINT = process.env.DEV_DYNAMODB_ARN;
+    DYNAMODB_TABLENAME = process.env.DEV_DYNAMODB_TBLNAME;
   }
+
+  const reqBody = event['body-json']['data']['body'];
+
+  const params = {
+    TableName: DYNAMODB_TABLENAME,
+    Item: {
+      'NAME': { S: reqBody.name },
+      'TITLE': { S: reqBody.title }
+    }
+  };
+
+  ddb.putItem(params, (err, data) => {
+    if (err) {
+      console.log("Error", err);
+    } else {
+      console.log("Success", data);
+    }
+  });
 
   const responseBody = event['body-json'];
 
