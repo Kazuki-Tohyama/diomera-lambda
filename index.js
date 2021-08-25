@@ -34,11 +34,13 @@ exports.handler = async (event) => {
     }
   });
 
+  console.log(test);
+
   const responseBody = event['body-json'];
 
   const response = {
     statusCode: 200,
-    body: JSON.stringify(test),
+    body: responseBody,
   };
   return response;
 };
