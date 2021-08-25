@@ -1,0 +1,22 @@
+{
+  "name": "diomera-lambda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kazuki-Tohyama/diomera-lambda.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kazuki-Tohyama/diomera-lambda/issues"
+  },
+  "homepage": "https://github.com/Kazuki-Tohyama/diomera-lambda#readme",
+  "dependencies": {
+    "aws-sdk": "^2.975.0"
+  }
+}
