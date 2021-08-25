@@ -14,7 +14,7 @@ exports.handler = async (event) => {
 
   // const reqBody = event['body-json'];
 
-  const unixtime = new Date().getTime().toString();
+  const unixtime = new Date().getTime();
 
   const params = {
     TableName: DYNAMODB_TABLENAME,
