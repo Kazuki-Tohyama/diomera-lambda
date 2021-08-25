@@ -20,27 +20,23 @@ exports.handler = async (event) => {
     TableName: DYNAMODB_TABLENAME,
     Item: {
       'id': unixtime
-      // 'name': { S: reqBody.name },
-      // 'title': { S: reqBody.title}
+      // 'name': reqBody.name,
+      // 'title': reqBody.title
     }
   };
 
-  const test = dynamodb.put(params, function (err, data) {
-    console.log('putItem');
-    if (err) {
-      console.log("Error", err);
-    } else {
-      console.log("Success", data);
-    }
-  });
+  let result;
+  try {
+    result = dynamodb.put(params);
+  } catch (err) {
+    result = err;
+  }
 
-  console.log(test);
-
-  const responseBody = event['body-json'];
+  // const responseBody = event['body-json'];
 
   const response = {
     statusCode: 200,
-    body: responseBody,
+    body: result,
   };
   return response;
 };
